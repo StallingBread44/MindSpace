@@ -140,7 +140,7 @@ p{
 #description1{
     font-family: "Montserrat", sans-serif;
     color:#d1cfc6;
-    font-size: 50px;
+    font-size: 4em;
     margin: 20px 0;
 }
 .schedule-wrapper{
@@ -689,3 +689,156 @@ p{
 #kmini{
     width: fit-content;
 }
+@media (max-width: 1024px) {
+    .navbar {
+        position: fixed;
+        bottom: 20px;          /* lift off bottom */
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: fit-content;    /* 🔑 not full width */
+        height: 4em;
+
+        padding: 0.25em 4em;
+        border-radius: 36px;   /* pill shape */
+        background: #689891;
+        box-shadow: #4a6e69 2px 5px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .navbar ul {
+        display: flex;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+    }
+    .navbar li{
+        font-size: 0.1em;
+    }
+    .cname{
+        font-size:7em;
+        margin: 0.05em 0;
+    }
+    #description1{
+        font-size:2em;
+        margin: 0.05em 0;
+    }
+    .schedule-wrapper{
+        height: 5em;
+        width: 20em;
+        font-size: 1em;
+        margin: 2em 0;
+        border-radius: 1.75em;
+    }
+    .additionalinfo{
+        margin: 10em 0 1em 0;
+    }
+    .hpbox-header{
+        font-size: 2em;
+    }
+    .hpbox-text{
+        font-size: 1em;
+    }
+    .box{
+        margin: 4em 2em;
+    }
+
+    body {
+        padding-bottom: 100px; /* prevent overlap */
+    }
+
+}
+@media (max-width: 768px) {
+    .hero {
+        margin: 5em 1em 2em;  /* smaller top/bottom margins, center horizontally */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .navbar {
+        position: fixed;
+        bottom: 20px;          /* lift off bottom */
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 10em;    /* 🔑 not full width */
+        height: 2em;
+
+        padding: 0.25em 4em;
+        border-radius: 36px;   /* pill shape */
+        background: #689891;
+        box-shadow: #4a6e69 2px 5px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .navbar ul {
+        display: flex;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+    }
+    .navbar li{
+        font-size: 4px;
+        margin: 0;
+    }
+    .cname{
+        font-size:4em;
+        margin: 0.05em 3em;
+    }
+    #description1{
+        font-size:1em;
+        margin: 1em 0;
+    }
+    .schedule-wrapper{
+        height: 4em;
+        width: 15em;
+        font-size: 1em;
+        margin: 2em 0;
+        border-radius: 1.75em;
+    }
+    .additionalinfo{
+        margin: 5em 0 1em 0;
+    }
+    .hpbox-header{
+        font-size: 2em;
+    }
+    .hpbox-text{
+        font-size: 1em;
+    }
+    .box{
+        margin: 4em 2em;
+    }
+    .login-btn-wrapper{
+        width: 6em;
+        height: 3em;
+    }
+    .login-direct{
+        font-size: 1em;
+    }
+    .logo img {
+        max-width: 14em;
+    }
+    .header-wrapper{
+        margin: 1.5em 1.5em;
+    }
+
+    body {
+        margin: 0;               /* remove any default margin */
+        padding-bottom: 6em;     /* prevent content hiding behind navbar */
+        overflow-x: hidden;      /* prevent horizontal scroll */
+        text-align: center; 
+    }
+}
+
