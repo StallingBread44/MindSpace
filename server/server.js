@@ -101,7 +101,7 @@ app.get('/api/threads', async (req, res) => {
   try {
     const { category } = req.query;
     const result = await pool.query(
-      `SELECT t.id, t.title, u.username
+      `SELECT t.id, t.title, u.username, t.content
        FROM threads t
        JOIN users u ON t.author_id = u.id
        WHERE t.category_id = $1
@@ -120,7 +120,7 @@ app.get('/api/threads/:id', async (req, res) => {
     const { id } = req.params;
 
     const threadResult = await pool.query(
-      `SELECT t.id, t.title, u.username
+      `SELECT t.id, t.title, u.username, t.content
        FROM threads t
        JOIN users u ON t.author_id = u.id
        WHERE t.id = $1`,
@@ -128,7 +128,7 @@ app.get('/api/threads/:id', async (req, res) => {
     );
 
     const repliesResult = await pool.query(
-      `SELECT r.id, r.content, u.username
+      `SELECT r.id, r.content, u.username, r.content
        FROM replies r
        JOIN users u ON r.author_id = u.id
        WHERE r.thread_id = $1
