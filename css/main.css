@@ -273,7 +273,7 @@ p{
 .login-button{
     width: 100%;
 }
-#signup-btn{
+.auth-btn{
     margin: 10px 0 20px 0;
     border: none;
     background-color:#689891;
