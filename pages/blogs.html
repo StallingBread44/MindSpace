@@ -2,29 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title id>MindSpace</title>
+    <title>Blogs | MindSpace</title>
     <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-
 <body>
-   <header>
+<header>
     <div class="header-wrapper">
         <div class="logo-wrapper">
-        <a class="logo" href="../index.html" ><img src="../assets/logo-withtname.svg"></a>
+            <a class="logo" href="../index.html"><img src="../assets/logo-withtname.svg"></a>
         </div>
         <div class="nav-wrapper">
             <nav class="navbar">
                 <ul>
                     <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
-                    <li><a href="../pages/blog-posts.html">Blog Posts</a></li>
+                    <li><a href="../pages/blogs.html">Blog Posts</a></li>
                     <li><a href="../pages/forums.html">Forums</a></li>
                     <li><a href="../pages/testimonials.html">Testimonials</a></li>
+                    <li><a href="https://www.therapynotes.com">Counseling</a></li>
                 </ul>
             </nav>
         </div>
@@ -39,69 +38,59 @@
         <div class="overlay-menu">
             <ul>
                 <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
-                <li><a href="../pages/blog-posts.html">Blog Posts</a></li>
+                <li><a href="../pages/blogs.html">Blog Posts</a></li>
                 <li><a href="../pages/forums.html">Forums</a></li>
                 <li><a href="../pages/testimonials.html">Testimonials</a></li>
+                <li><a href="https://www.therapynotes.com">Counseling</a></li>
             </ul>
         </div>
     </div>
-    </header>
-    <div class="hero-forums">
-        <div class="forums-entry">
-            <div class="forums-entry-coloumn">
-                <div class="forums-entry-userinfo">
-                    <img class="forums-pfp" src="../assets/kmini.svg" alt="User PFP">
-                    <div class="forums-user-details">
-                        <h2 class="forums-username">Username</h2>
-                    </div>
-                </div>
-                <div class="forums-textbox-container">
-                    <textarea class="forums-textbox" placeholder="Share your thoughts..."></textarea>
-                </div>
-            </div>
-            <hr class="post-divider">
-            <div class="forums-entry-coloumn forum-entry-actions">
-                <div class="forums-image-upload">
-                    <button class="action-btn" >
-                        <img id="forums-entry-img-upload" class="action-btn-img" src="../assets/img-upload.svg">
-                        <span id="forums-action-btn-image" class="descriptor">Image</span>
-                    </button>
-                </div>
-                <div class="forums-postbutton">
-                    <button class="action-btn" id="submit-forum-post">
-                        <img class="action-btn-img" id="submit-forum-post-arrow" src="../assets/arrow.svg">
-                    </button>
-                </div>
-            </div>
-        </div>
-        
+</header>
+
+<div class="hero-forums">
     <div class="forums-post-wrapper">
-        <div class="forums-comments">
-            <div class="comment-input hidden ">
-                <div class="forums-post-userinfo">
-                    <img class="forums-post-pfp" src="path/to/profile.jpg" alt="Profile Picture">
-                    <div class="forums-post-details">
-                        <h1 class="forums-username">Username</h1>
-                        <p class="forums-time">Posted x hours ago</p>
-                    </div>
-                </div>
-                <div class="forums-post-content">
-                    <textarea class="forums-textbox" placeholder="Share your thoughts..."></textarea>
-                </div>                
-                <button class="submit-comment action-btn" type="button">
-                    <img class="action-btn-img" id="submit-comment-post-arrow" src="../assets/arrow.svg">
-                </button>
-            </div>
-            </div>
-        </div>
-
-        </div>
+        <h1>Blogs</h1>
+        <ul id="blogs" class="forums-comments">
+            <!-- Blog links will be appended here -->
+        </ul>
     </div>
+</div>
+
+<script>
+    async function loadBlogs() {
+        const list = document.getElementById("blogs");
+
+        try {
+            const res = await fetch("/api/blogs", {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            });
+
+            if (!res.ok) throw new Error("Failed to fetch blogs");
+
+            const blogs = await res.json();
+
+            list.innerHTML = "";
+
+            if (blogs.length === 0) {
+                list.innerHTML = "<li>No blog posts yet.</li>";
+                return;
+            }
+
+            blogs.forEach(b => {
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="blog.html?id=${b.id}">${b.title}</a>
+                    <span style="opacity:0.6">by ${b.username}</span>`;
+                list.appendChild(li);
+            });
+
+        } catch (err) {
+            console.error(err);
+            list.innerHTML = "<li>Error loading blogs.</li>";
+        }
+    }
+
+    loadBlogs();
+</script>
 </body>
-    <script src="../js/forums.js"></script>
-
-
-
 </html>
-
-

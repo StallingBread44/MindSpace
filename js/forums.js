@@ -1,119 +1,136 @@
-const token = localStorage.getItem("token");
-const params = new URLSearchParams(window.location.search);
-const categoryId = params.get("category");
-
-/* ---------------- AUTO RESIZE ---------------- */
 function autoResize(el) {
-  const MAX_HEIGHT = 500;
-  el.style.height = "auto";
-  el.style.height = Math.min(el.scrollHeight, MAX_HEIGHT) + "px";
+    const MAX_HEIGHT = 500; // px
+    el.style.height = 'auto';
+    if (el.scrollHeight > MAX_HEIGHT) {
+        el.style.height = MAX_HEIGHT + 'px';
+        el.style.overflowY = 'auto';
+    } else {
+        el.style.height = el.scrollHeight + 'px';
+        el.style.overflowY = 'hidden';
+    }
 }
 
-document.addEventListener("input", e => {
-  if (e.target.classList.contains("forums-textbox")) {
-    autoResize(e.target);
-  }
+// Initialize existing textareas
+document.querySelectorAll('.forums-textbox').forEach(textarea => {
+    textarea.addEventListener('input', () => autoResize(textarea));
+    autoResize(textarea);
 });
 
-/* ---------------- LOAD THREADS ---------------- */
-async function loadThreads() {
-  const res = await fetch(`/api/threads?category=${categoryId}`);
-  const threads = await res.json();
-
-  const container = document.querySelector(".hero-forums");
-
-  threads.forEach(t => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "forums-post-wrapper";
-    wrapper.dataset.threadId = t.id;
-
-    wrapper.innerHTML = `
-      <div class="forums-post">
-        <div class="forums-post-userinfo">
-          <img class="forums-post-pfp" src="path/to/profile.jpg">
-          <div class="forums-post-details">
-            <h1 class="forums-username">${t.username}</h1>
-          </div>
-        </div>
-        <div class="forums-post-content">
-          <p class="forums-post-text">${t.title}</p>
-        </div>
-        <hr class="post-divider">
-        <div class="forums-post-actions">
-          <button class="action-btn comment-btn">
-            <img src="../assets/comment.svg">
-          </button>
-        </div>
-      </div>
-
-      <div class="forums-comments">
-        <div class="comment-input hidden">
-          <textarea class="forums-textbox" placeholder="Write a comment..."></textarea>
-          <button class="submit-comment action-btn">Post</button>
-        </div>
-      </div>
-    `;
-
-    container.appendChild(wrapper);
-  });
+// --- Toggle comment input box ---
+function toggleCommentInput(postWrapper) {
+    const commentInput = postWrapper.querySelector('.comment-input');
+    if (commentInput) {
+        commentInput.classList.toggle('hidden');
+        const textarea = commentInput.querySelector('textarea');
+        if (textarea) textarea.focus();
+    }
 }
 
-loadThreads();
-
-/* ---------------- CREATE THREAD ---------------- */
-document.getElementById("submit-forum-post").addEventListener("click", async () => {
-  const textarea = document.querySelector(".forums-entry .forums-textbox");
-  const content = textarea.value.trim();
-  if (!content) return;
-
-  await fetch("/api/threads", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      title: content,
-      content,
-      categoryId
-    })
-  });
-
-  textarea.value = "";
-  location.reload();
+// Delegate comment button clicks (works for dynamically added posts)
+document.addEventListener('click', e => {
+    if (e.target.closest('.action-btn') && e.target.closest('.action-btn').querySelector('img[src*="comment"]')) {
+        const postWrapper = e.target.closest('.forums-post-wrapper');
+        if (postWrapper) toggleCommentInput(postWrapper);
+    }
 });
 
-/* ---------------- TOGGLE COMMENT BOX ---------------- */
-document.addEventListener("click", e => {
-  if (e.target.closest(".comment-btn")) {
-    const wrapper = e.target.closest(".forums-post-wrapper");
-    wrapper.querySelector(".comment-input").classList.toggle("hidden");
-  }
+// --- Submit comment ---
+document.addEventListener('click', e => {
+    if (e.target.classList.contains('submit-comment')) {
+        const btn = e.target;
+        const inputBox = btn.previousElementSibling.querySelector('textarea');
+        const text = inputBox.value.trim();
+        if (!text) return;
+
+        const postWrapper = btn.closest('.forums-post-wrapper');
+        const commentsContainer = postWrapper.querySelector('.forums-comments');
+
+        const comment = document.createElement('div');
+        comment.className = 'comment';
+        comment.innerHTML = `
+            <div class="forums-post-userinfo">
+                <img class="forums-post-pfp" src="path/to/profile.jpg" alt="Profile Picture">
+                <div class="forums-post-details">
+                    <h1 class="forums-username">Username</h1>
+                    <p class="forums-time">Just now</p>
+                </div>
+            </div>
+            <div class="forums-post-content">
+                <p class="forums-post-text">${text}</p>
+            </div>
+        `;
+
+        commentsContainer.appendChild(comment);
+        inputBox.value = '';
+        btn.parentElement.classList.add('hidden');
+    }
 });
 
-/* ---------------- SUBMIT COMMENT ---------------- */
-document.addEventListener("click", async e => {
-  if (!e.target.classList.contains("submit-comment")) return;
+// --- Submit new forum post ---
+const postBtn = document.querySelector('.forums-postbutton .action-btn');
+if (postBtn) {
+    postBtn.addEventListener('click', () => {
+        const entryWrapper = postBtn.closest('.forums-entry');
+        const textarea = entryWrapper.querySelector('.forums-textbox');
+        const text = textarea.value.trim();
+        if (!text) return;
 
-  const wrapper = e.target.closest(".forums-post-wrapper");
-  const textarea = wrapper.querySelector(".forums-comments textarea");
-  const text = textarea.value.trim();
-  if (!text) return;
+        const forumPostsContainer = document.querySelector('.hero-forums');
 
-  const threadId = wrapper.dataset.threadId;
+        // Create post wrapper
+        const postWrapper = document.createElement('div');
+        postWrapper.className = 'forums-post-wrapper';
+        postWrapper.innerHTML = `
+            <div class="forums-post">
+                <div class="forums-post-userinfo">
+                    <img class="forums-post-pfp" src="path/to/profile.jpg" alt="Profile Picture">
+                    <div class="forums-post-details">
+                        <h1 class="forums-username">Username</h1>
+                        <p class="forums-time">Just now</p>
+                    </div>
+                </div>
+                <div class="forums-post-content">
+                    <p class="forums-post-text">${text}</p>
+                </div>
+                <hr class="post-divider">
+                <div class="forums-post-actions">
+                    <button class="action-btn">
+                        <img class="action-btn-img" src="../assets/like.svg">
+                        <span class="count">0</span>
+                    </button>
+                    <button class="action-btn">
+                        <img class="action-btn-img" src="../assets/comment.svg">
+                        <span class="count">0</span>
+                    </button>
+                    <button class="action-btn">
+                        <img class="action-btn-img" src="../assets/img-upload.svg">
+                        <span class="count">0</span>
+                    </button>
+                </div>
+            </div>
+            <div class="forums-comments">
+                <div class="comment-input hidden">
+                    <div class="forums-post-userinfo">
+                        <img class="forums-post-pfp" src="path/to/profile.jpg" alt="Profile Picture">
+                        <div class="forums-post-details">
+                            <h1 class="forums-username">Username</h1>
+                            <p class="forums-time">Just now</p>
+                        </div>
+                    </div>
+                    <div class="forums-post-content">
+                        <textarea class="forums-textbox" placeholder="Share your thoughts..."></textarea>
+                    </div>
+                    <button class="submit-comment action-btn" type="button">
+                    <img class="action-btn-img" id="submit-comment-post-arrow" src="../assets/arrow.svg">
+                    </button>
+                </div>
+            </div>
+        `;
 
-  await fetch("/api/threads/reply", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      threadId,
-      content: text
-    })
-  });
+        forumPostsContainer.appendChild(postWrapper);
 
-  textarea.value = "";
-  wrapper.querySelector(".comment-input").classList.add("hidden");
-});
+        // Reset textarea
+        textarea.value = '';
+        autoResize(textarea);
+    });
+}

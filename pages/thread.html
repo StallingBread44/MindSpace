@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thread | MindSpace</title>
+  <link rel="icon" href="../assets/mindspace-logo.PNG">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
+</head>
+
+<body id="thread">
+
+<header>
+    <div class="header-wrapper">
+      <div class="logo-wrapper">
+        <a class="logo" href="../index.html"><img src="../assets/logo-withtname.svg"></a>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="navbar">
+          <ul>
+            <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
+            <li><a href="../pages/blogs.html">Blog Posts</a></li>
+            <li><a href="../pages/forums.html">Forums</a></li>
+            <li><a href="../pages/testimonials.html">Testimonials</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="login-btn-wrapper">
+        <a href="../pages/login.html" class="login-direct">Login</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="overlay-menu">
+        <ul>
+          <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
+          <li><a href="../pages/blogs.html">Blog Posts</a></li>
+          <li><a href="../pages/forums.html">Forums</a></li>
+          <li><a href="../pages/testimonials.html">Testimonials</a></li>
+          <li><a href="https://www.therapynotes.com">Counseling</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+<div class="hero-forums">
+
+  <div class="forums-post-wrapper">
+    <h1 id="title"></h1>
+    <h2 id="author"></h2>
+    <p id="content"></p>
+
+    <ul id="replies" class="forums-comments"></ul>
+
+    <!-- REPLY BOX -->
+    <div class="forums-entry">
+      <textarea id="reply" class="forums-textbox" placeholder="Write a reply..."></textarea>
+      <button id="reply-btn" class="action-btn">Reply</button>
+    </div>
+  </div>
+
+</div>
+<div id="toast" class="toast">You must be signed in to post!</div>
+
+
+<script>
+var token = localStorage.getItem("token");
+var params = new URLSearchParams(window.location.search);
+var id = params.get("id");
+
+/* LOAD THREAD */
+fetch("/api/threads/" + id)
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    document.getElementById("title").textContent = data.thread.title;
+    document.getElementById("author").textContent = "By " + data.thread.username;
+    document.getElementById("content").textContent = data.thread.content;
+
+
+
+    var replies = document.getElementById("replies");
+    data.replies.forEach(function(r) {
+      var li = document.createElement("li");
+      li.classList.add("comment-item");
+      li.innerHTML = "<h3>" + r.username + "</h3><p>" + r.content + "</p>";
+      replies.appendChild(li);
+    });
+  });
+
+/* POST REPLY */
+document.getElementById("reply-btn").onclick = function () {
+  if (!reply.value) return;
+
+  fetch("/api/threads/reply", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify({
+      threadId: id,
+      content: reply.value
+    })
+  }).then(function() {
+    location.reload();
+  });
+};
+</script>
+
+</body>
+</html>

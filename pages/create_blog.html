@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create Blog Post</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+  }
+
+  #editor {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+    padding: 16px;
+  }
+
+  #preview {
+    width: 50%;
+    padding: 16px;
+    overflow-y: scroll;
+  }
+
+  textarea {
+    flex: 1;
+    width: 100%;
+    resize: none;
+    font-family: monospace;
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  button {
+    margin-top: 12px;
+    padding: 10px 14px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="editor">
+  <h2>Create Blog Post</h2>
+  <input type="text" id="title" placeholder="Enter title">
+  <textarea id="markdown" placeholder="Write Markdown here..."></textarea>
+  <button id="submit">Publish</button>
+</div>
+
+<div id="preview">
+  <h2>Preview</h2>
+  <div id="rendered"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.2/dist/purify.min.js"></script>
+
+<script>
+  const mdInput = document.getElementById('markdown');
+  const rendered = document.getElementById('rendered');
+
+  // live preview update
+  mdInput.addEventListener('input', () => {
+    const html = marked.parse(mdInput.value);
+    rendered.innerHTML = DOMPurify.sanitize(html);
+  });
+
+  document.getElementById('submit').addEventListener('click', async () => {
+    const title = document.getElementById('title').value.trim();
+    const md = mdInput.value.trim();
+
+    if (!title || !md) {
+      alert("Title and content are required");
+      return;
+    }
+
+    const htmlContent = DOMPurify.sanitize(marked.parse(md));
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("You must be logged in");
+      return;
+    }
+
+    const res = await fetch('/api/blogs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ title, content: htmlContent })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("Blog post created!");
+      window.location.href = `/pages/blog.html?id=${data.id}`;
+    } else {
+      alert(data.message || "Failed to submit");
+    }
+  });
+</script>
+
+</body>
+</html>

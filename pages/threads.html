@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Threads | MindSpace</title>
+  <link rel="icon" href="../assets/mindspace-logo.PNG">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
+</head>
+
+<body id="threads">
+
+<header>
+    <div class="header-wrapper">
+      <div class="logo-wrapper">
+        <a class="logo" href="../index.html"><img src="../assets/logo-withtname.svg"></a>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="navbar">
+          <ul>
+            <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
+            <li><a href="../pages/blogs.html">Blog Posts</a></li>
+            <li><a href="../pages/forums.html">Forums</a></li>
+            <li><a href="../pages/testimonials.html">Testimonials</a></li>
+            <li><a href="https://www.therapynotes.com">Counseling</a></li>
+
+          </ul>
+        </nav>
+      </div>
+      <div class="login-btn-wrapper">
+        <a href="../pages/login.html" class="login-direct">Login</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="overlay-menu">
+        <ul>
+          <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
+          <li><a href="../pages/blogs.html">Blog Posts</a></li>
+          <li><a href="../pages/forums.html">Forums</a></li>
+          <li><a href="../pages/testimonials.html">Testimonials</a></li>
+          <li><a href="https://www.therapynotes.com">Counseling</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+<div class="hero-forums-general">
+
+  <!-- CREATE THREAD -->
+  <div class="forums-entry">
+    <input id="title" class="forums-textbox" placeholder="Thread title">
+    <textarea id="content" class="forums-textbox" placeholder="Start the discussion..."></textarea>
+    <button id="create-thread" class="action-btn">Post</button>
+  </div>
+
+  <!-- THREAD LIST -->
+  <div class="forums-post-wrapper">
+    <ul id="threads-list" class="forums-comments"></ul>
+  </div>
+
+</div>
+
+<script>
+const titleInput = document.getElementById("title");
+const contentInput = document.getElementById("content");
+var token = localStorage.getItem("token");
+var params = new URLSearchParams(window.location.search);
+var category = params.get("category");
+
+/* LOAD THREADS */
+fetch("/api/threads?category=" + category)
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    var list = document.getElementById("threads-list");
+    data.forEach(function(t) {
+      var li = document.createElement("li");
+      li.classList.add("thread-item");
+      li.innerHTML =
+        '<a href="thread.html?id=' + t.id + '">' +
+        '<strong>' + t.title + '</strong>' +
+        '</a> — by ' + t.username;
+      list.appendChild(li);
+    });
+  });
+
+/* CREATE THREAD */
+document.getElementById("create-thread").onclick = function () {
+  if (!title.value || !content.value) return;
+
+  fetch("/api/threads", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token
+    },
+    body: JSON.stringify({
+      title: title.value,
+      content: content.value,
+      categoryId: category
+    })
+  }).then(function() {
+    location.reload();
+  });
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Post | MindSpace</title>
+    <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="header-wrapper">
+        <div class="logo-wrapper">
+            <a class="logo" href="../index.html"><img src="../assets/logo-withtname.svg"></a>
+        </div>
+        <div class="nav-wrapper">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
+                    <li><a href="../pages/blogs.html">Blog Posts</a></li>
+                    <li><a href="../pages/forums.html">Forums</a></li>
+                    <li><a href="../pages/testimonials.html">Testimonials</a></li>
+                    <li><a href="https://www.therapynotes.com">Counseling</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="login-btn-wrapper">
+            <a href="../pages/login.html" class="login-direct">Login</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="overlay-menu">
+            <ul>
+                <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
+                <li><a href="../pages/blogs.html">Blog Posts</a></li>
+                <li><a href="../pages/forums.html">Forums</a></li>
+                <li><a href="../pages/testimonials.html">Testimonials</a></li>
+                <li><a href="https://www.therapynotes.com">Counseling</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="hero-forums">
+    <div class="forums-post-wrapper">
+        <h1 id="title"></h1>
+        <p id="author"></p>
+        <div id="content"></div>
+    </div>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const titleEl = document.getElementById("title");
+    const authorEl = document.getElementById("author");
+    const contentEl = document.getElementById("content");
+
+    if (!id) {
+        titleEl.textContent = "Blog not found";
+    } else {
+        fetch(`/api/blogs/${id}`)
+            .then(res => {
+                if (!res.ok) throw new Error("Blog not found");
+                return res.json();
+            })
+            .then(data => {
+                titleEl.textContent = data.title;
+                authorEl.textContent = "By " + data.username;
+                contentEl.innerHTML = data.content; // assumes backend returns HTML-safe content
+            })
+            .catch(err => {
+                titleEl.textContent = "Blog not found";
+                authorEl.textContent = "";
+                contentEl.textContent = "";
+            });
+    }
+</script>
+</body>
+</html>

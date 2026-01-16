@@ -2,57 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title id>MindSpace</title>
+    <title>Sign Up | MindSpace</title>
     <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/theme.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
 </head>
-
 <body id="login">
-    <div class="login-wrapper">
-        <div class="backbutton-wrapper">
-            <button onclick="history.back()" class="back-btn"><img class="login-arrow" src="../assets/back-btn.svg">Back</button>
+
+<div class="login-wrapper">
+    <div class="backbutton-wrapper">
+        <button onclick="history.back()" class="back-btn">
+            <img class="login-arrow" src="../assets/back-btn.svg">Back
+        </button>
+    </div>
+
+    <div class="login-logo">
+        <img id="login-logo" src="../assets/mindspace-logo.PNG">
+    </div>
+
+    <div class="info">
+        <h1 id="wlcmsg">Welcome In!</h1>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <div class="text-fields">
+        <div id="name">
+            <input class="textbox" type="text" id="username-input" placeholder="Name" maxlength="50">
         </div>
-        <div class="login-logo">
-            <img id="login-logo" src="../assets/mindspace-logo.PNG">
+        <div id="email">
+            <input class="textbox" type="text" id="email-input" placeholder="E-Mail Address" maxlength="50">
         </div>
-        <div class="info">
-            <h1 id="wlcmsg">
-                Welcome In!
-            </h1>
-            <p>
-               Already have an account?
-                <a href="../pages/login.html">Login</a>
-            </p>
-            
-        </div>
-        <div class="text-fields">
-            <div id="name">
-                <input class="textbox" type="text" name="name" id="name" placeholder="Goonesh" maxlength="50">
-            </div>
-            <div id="email">
-                <input class="textbox" type="text" name="email" id="email" placeholder="ramesh.kamineni@gmail.com" maxlength="50">
-            </div>
-            <div id="password">
-                <input class="textbox" type="password" name="password" id="password" placeholder="Password" maxlength="50">
-        </div>
-        </div>
-        <div class="login-direct">
-            <button id="login-btn">Login</button>
-        </div>
-        <div class="login-options">
-            <a href="https://google.com"><img class="login-option-img" src="../assets/google.svg"></a>
-            <a href="https://apple.com"><img class="login-option-img" src="../assets/apple.svg"></a>
-            <a href="https://twitter.com"><img class="login-option-img" src="../assets/twitter.svg"></a>
+        <div id="password">
+            <input class="textbox" type="password" id="password-input" placeholder="Password" maxlength="50">
         </div>
     </div>
+
+    <div class="login-direct">
+        <button class="login-btn" id="signup-btn">Sign Up</button>
+    </div>
+
+    <div id="msg" class="note"></div>
+</div>
+
+<script>
+document.getElementById("signup-btn").onclick = async () => {
+    const usernameEl = document.getElementById("username-input");
+    const emailEl = document.getElementById("email-input");
+    const passwordEl = document.getElementById("password-input");
+    const msg = document.getElementById("msg");
+
+    const username = usernameEl.value.trim();
+    const email = emailEl.value.trim();
+    const password = passwordEl.value;
+
+    if (!username || !email || !password) {
+        msg.textContent = "All fields are required.";
+        msg.style.color = "red";
+        return;
+    }
+
+    try {
+        const res = await fetch("/api/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            msg.textContent = "Account created! Redirecting to login...";
+            msg.style.color = "green";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1200);
+        } else {
+            msg.textContent = data.message || "Signup failed.";
+            msg.style.color = "red";
+        }
+    } catch (err) {
+        msg.textContent = "Network error. Try again.";
+        msg.style.color = "red";
+    }
+};
+</script>
+
 </body>
-
-
 </html>
-
-
