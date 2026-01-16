@@ -1,0 +1,103 @@
+
+.homepage > * {
+    grid-area: stack;
+}
+.parallax-priorityobj{
+    z-index: 1000;
+}
+header{
+    z-index: 1000;
+}
+#trees{
+    width: 102vw;
+    max-height: fit-content;
+    object-fit: cover;
+    position: absolute; 
+    top: 1px;
+    left: 1px;
+    z-index: 10;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 8;
+}
+#hills{
+    width: 70.7919071126vw;
+    object-fit: cover;
+    position: absolute; 
+    top: 460px;
+    left: 520px;
+    z-index: 9;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 10;
+}
+#empty{
+    width: 100vw;
+    object-fit: cover;
+    position: absolute; 
+    z-index: 1;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 5;
+}
+#hills-2{
+    width: 101.997803628vw;
+    object-fit: cover;
+    position: absolute; 
+    top: 0px;
+    left: 0.01px;
+    z-index: 8;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 10;
+}
+#hills-3{
+    width: 100vw;
+    object-fit: cover;
+    position: absolute; 
+    top: 100px;
+    z-index: 6;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 11;
+}
+#empty-2{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute; 
+    top: 100px;
+    z-index: 1;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 5;
+}
+#hills-4{
+    width: 47.5353831137vw;
+    object-fit: cover;
+    position: absolute; 
+    top: 80px;
+    left: 898px;
+    z-index: 7;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 10;
+}
+#sky{
+    width: 100vw;
+    object-fit: cover;
+    position: absolute; 
+    top: 0px;
+    z-index: 1;
+    animation: parallax linear;
+    animation-timeline: scroll();
+    --parallax-speed: 20;
+}
+@keyframes parallax {
+    to { 
+        transform: translateY(calc(var(--parallax-speed) * 200px))
+    }
+}
+#bpalogo{
+    width: 80%
+}

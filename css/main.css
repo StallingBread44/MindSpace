@@ -1027,8 +1027,6 @@ p{
     font-family: "Inter", sans-serif;
     font-size: 0.9em;
 }
-.forums-post-wrapper{
-}
 .forums-post-wrapper .comment{
     transform: translatex(+10%);
     background-color:#292929;
@@ -1263,5 +1261,4 @@ button:disabled{
 }
 #bpalogo{
     width: 80%
-
 }
