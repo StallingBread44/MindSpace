@@ -61,7 +61,7 @@
 
   <!-- THREAD LIST -->
   <div class="forums-post-wrapper">
-    <ul id="threads-list" class="forums-comments"></ul>
+    <ul id="threads-list"></ul>
   </div>
 
 </div>
@@ -74,7 +74,7 @@ var params = new URLSearchParams(window.location.search);
 var category = params.get("category");
 
 /* LOAD THREADS */
-fetch("/api/threads?category=" + category)
+fetch("http://localhost:3000/api/threads?category=" + category)
   .then(function(res) { return res.json(); })
   .then(function(data) {
     var list = document.getElementById("threads-list");

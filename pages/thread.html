@@ -74,7 +74,7 @@ var params = new URLSearchParams(window.location.search);
 var id = params.get("id");
 
 /* LOAD THREAD */
-fetch("/api/threads/" + id)
+fetch("http://localhost:3000/api/threads/" + id)
   .then(function(res) { return res.json(); })
   .then(function(data) {
     document.getElementById("title").textContent = data.thread.title;

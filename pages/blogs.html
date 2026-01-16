@@ -50,7 +50,7 @@
 <div class="hero-forums">
     <div class="forums-post-wrapper">
         <h1>Blogs</h1>
-        <ul id="blogs" class="forums-comments">
+        <ul id="blogs">
             <!-- Blog links will be appended here -->
         </ul>
     </div>
@@ -61,7 +61,7 @@
         const list = document.getElementById("blogs");
 
         try {
-            const res = await fetch("/api/blogs", {
+            const res = await fetch("http://localhost:3000/api/blogs", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
