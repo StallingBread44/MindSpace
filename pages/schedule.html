@@ -29,7 +29,7 @@
             </nav>
         </div>
        <div class="login-btn-wrapper">
-            <a href="../pages/login.html" class="login-direct">Login</a>
+            <a id="loginBtn" href="../pages/login.html" class="login-direct">Login</a>
         </div>
         <div class="hamburger">
             <span></span>
@@ -583,7 +583,29 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+<script>
+(function() {
+    const token = localStorage.getItem("token");
+    const headerBtn = document.getElementById("loginBtn");
+    const overlayBtn = document.getElementById("loginBtnOverlay");
 
+    function applyLogout(btn) {
+        if (!btn) return;
+        btn.textContent = "Log out";
+        btn.removeAttribute("href");
+        btn.style.cursor = "pointer";
+        btn.addEventListener("click", () => {
+            localStorage.removeItem("token");
+            location.reload();
+        });
+    }
+
+    if (token) {
+        applyLogout(headerBtn);
+        applyLogout(overlayBtn);
+    }
+})();
+</script>
 </html>
 
 

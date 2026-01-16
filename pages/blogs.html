@@ -28,7 +28,7 @@
             </nav>
         </div>
         <div class="login-btn-wrapper">
-            <a href="../pages/login.html" class="login-direct">Login</a>
+            <a id="loginBtn" href="../pages/login.html" class="login-direct">Login</a>
         </div>
         <div class="hamburger">
             <span></span>
@@ -41,6 +41,7 @@
                 <li><a href="../pages/blogs.html">Blog Posts</a></li>
                 <li><a href="../pages/forums.html">Forums</a></li>
                 <li><a href="../pages/testimonials.html">Testimonials</a></li>
+                <li><a id="overlayLoginBtn" href="../pages/login.html">Login</a></li>
             </ul>
         </div>
     </div>
@@ -50,7 +51,6 @@
     <div class="forums-post-wrapper">
         <h1>Blogs</h1>
         <ul id="blogs" class="forums-comments">
-            <!-- Blog links will be appended here -->
         </ul>
     </div>
 </div>
@@ -78,8 +78,10 @@
 
             blogs.forEach(b => {
                 const li = document.createElement("li");
-                li.innerHTML = `<a href="blog.html?id=${b.id}">${b.title}</a>
-                    <span style="opacity:0.6">by ${b.username}</span>`;
+                li.innerHTML = `
+                    <a href="blog.html?id=${b.id}">${b.title}</a>
+                    <span style="opacity:0.6">by ${b.username}</span>
+                `;
                 list.appendChild(li);
             });
 
@@ -91,5 +93,29 @@
 
     loadBlogs();
 </script>
+
+<script>
+(function() {
+    const token = localStorage.getItem("token");
+    const loginBtn = document.getElementById("loginBtn");
+    const overlayLoginBtn = document.getElementById("overlayLoginBtn");
+
+    function applyLogout(btn) {
+        btn.textContent = "Log out";
+        btn.removeAttribute("href");
+        btn.style.cursor = "pointer";
+        btn.addEventListener("click", () => {
+            localStorage.removeItem("token");
+            location.reload();
+        });
+    }
+
+    if (token) {
+        applyLogout(loginBtn);
+        applyLogout(overlayLoginBtn);
+    }
+})();
+</script>
+
 </body>
 </html>

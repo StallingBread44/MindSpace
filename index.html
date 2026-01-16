@@ -6,15 +6,15 @@
     <link rel="icon" href="assets/mindspace-logo.PNG" type="image/png">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/main.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+<header>
     <div class="header-wrapper">
         <div class="logo-wrapper">
-        <a class="logo" href="index.html" ><img src="assets/logo-withtname.svg"></a>
+        <a class="logo" href="index.html"><img src="assets/logo-withtname.svg"></a>
         </div>
         <div class="nav-wrapper">
             <nav class="navbar">
@@ -28,7 +28,7 @@
             </nav>
         </div>
         <div class="login-btn-wrapper">
-            <a href="pages/login.html" class="login-direct">Login</a>
+            <a href="pages/login.html" class="login-direct" id="loginBtn">Login</a>
         </div>
 
         <div class="hamburger">
@@ -45,44 +45,62 @@
             </ul>
         </div>
     </div>
-    </header>
-</body>
+</header>
+
 <div class="hero">
-    <h1 class="cname obj">
-        MindSpace
-    </h1>
-    <h3 class ="obj" id="description1">
+    <h1 class="cname obj">MindSpace</h1>
+    <h3 class="obj" id="description1">
         Begin your mental health journey by connecting with a vast community, consulting with certified therapists, and more
     </h3>
+
     <div class="schedule-wrapper obj">
         <a href="pages/schedule.html" class="schedule-button">Schedule Appointment</a>
     </div>
+
     <div class="additionalinfo">
         <div class="box obj">
-            <h1 class="hpbox-header">
-                Latest Posts
-            </h1>
+            <h1 class="hpbox-header">Latest Posts</h1>
             <p class="hpbox-text">
                 Our blog offers approachable insights, stories, and guidance on mental well-being. Explore topics designed to inform, encourage, and support you on your mental health journey.
             </p>
             <p class="hpbox-linkmsg">
-                →<a class="hpbox-link" href="pages/blogs.html">Read the Blog</a>
+                → <a class="hpbox-link" href="pages/blogs.html">Read the Blog</a>
             </p>
         </div>
+
         <div class="box obj">
-            <h1 class="hpbox-header">
-                Visit the Community
-            </h1>
+            <h1 class="hpbox-header">Visit the Community</h1>
             <p class="hpbox-text">
-                Our community forum provides a safe space to share experiences, ask questions, and connect with others. Join conversations that promote understanding, support, and a sense of belonging.            </p>
+                Our community forum provides a safe space to share experiences, ask questions, and connect with others. Join conversations that promote understanding, support, and a sense of belonging.
+            </p>
             <p class="hpbox-linkmsg">
-                →<a class="hpbox-link" href="pages/forums.html">Join the Forum</a>
+                → <a class="hpbox-link" href="pages/forums.html">Join the Forum</a>
             </p>
         </div>
     </div>
+
     <img id="bpalogo" src="assets/bpalogo.png">
 </div>
-<script src="js/smooth-scroll.js">
+
+<script src="js/smooth-scroll.js"></script>
+
+<script>
+(function() {
+    const token = localStorage.getItem("token");
+    const loginBtn = document.getElementById("loginBtn");
+
+    if (token) {
+        loginBtn.textContent = "Log out";
+        loginBtn.removeAttribute("href");
+        loginBtn.style.cursor = "pointer";
+
+        loginBtn.addEventListener("click", () => {
+            localStorage.removeItem("token");
+            location.reload();
+        });
+    }
+})();
 </script>
 
+</body>
 </html>

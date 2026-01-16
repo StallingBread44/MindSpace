@@ -28,8 +28,9 @@
             </nav>
         </div>
         <div class="login-btn-wrapper">
-            <a href="../pages/login.html" class="login-direct">Login</a>
+            <a id="loginBtn" href="../pages/login.html" class="login-direct">Login</a>
         </div>
+
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -41,6 +42,7 @@
                 <li><a href="../pages/blogs.html">Blog Posts</a></li>
                 <li><a href="../pages/forums.html">Forums</a></li>
                 <li><a href="../pages/testimonials.html">Testimonials</a></li>
+                <li><a id="overlayLoginBtn" href="../pages/login.html">Login</a></li>
             </ul>
         </div>
     </div>
@@ -72,14 +74,38 @@
             .then(data => {
                 titleEl.textContent = data.title;
                 authorEl.textContent = "By " + data.username;
-                contentEl.innerHTML = data.content; // assumes backend returns HTML-safe content
+                contentEl.innerHTML = data.content;
             })
-            .catch(err => {
+            .catch(() => {
                 titleEl.textContent = "Blog not found";
                 authorEl.textContent = "";
                 contentEl.textContent = "";
             });
     }
 </script>
+
+<script>
+(function() {
+    const token = localStorage.getItem("token");
+    const loginBtn = document.getElementById("loginBtn");
+    const overlayLoginBtn = document.getElementById("overlayLoginBtn");
+
+    function applyLogoutState(btn) {
+        btn.textContent = "Log out";
+        btn.removeAttribute("href");
+        btn.style.cursor = "pointer";
+        btn.addEventListener("click", () => {
+            localStorage.removeItem("token");
+            location.reload();
+        });
+    }
+
+    if (token) {
+        applyLogoutState(loginBtn);
+        applyLogoutState(overlayLoginBtn);
+    }
+})();
+</script>
+
 </body>
 </html>
