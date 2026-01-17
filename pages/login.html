@@ -6,6 +6,9 @@
     <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
 </head>
 <body id="login">
 
@@ -57,7 +60,7 @@ document.getElementById("login-btn").onclick = async () => {
     }
 
     try {
-        const res = await fetch("/api/login", {
+        const res = await fetch("http://localhost:3000/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
