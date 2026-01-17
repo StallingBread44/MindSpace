@@ -3,6 +3,7 @@ const dots = Array.from(document.querySelectorAll('.dot'));
 const upArrow = document.getElementById('up-arrow');
 const downArrow = document.getElementById('down-arrow');
 
+
 let currentIndex = wrappers.findIndex(wrapper => wrapper.classList.contains('active'));
 
 // Helper function to show a box with smooth animation
@@ -52,3 +53,12 @@ downArrow.addEventListener('click', () => {
 dots.forEach((dot, i) => {
     dot.addEventListener('click', () => showBox(i));
 });
+document.querySelectorAll('.comment-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const post = btn.closest('.forums-post-wrapper');
+    const input = post.querySelector('.comment-input');
+    input.classList.toggle('hidden');
+  });
+});
+
+

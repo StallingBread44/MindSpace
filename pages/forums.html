@@ -6,6 +6,9 @@
   <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/theme.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
 </head>
 <body id="forums">
   <header>
@@ -38,6 +41,7 @@
           <li><a href="../pages/blogs.html">Blog Posts</a></li>
           <li><a href="../pages/forums.html">Forums</a></li>
           <li><a href="../pages/testimonials.html">Testimonials</a></li>
+          <li><a href="https://www.therapynotes.com">Counseling</a></li>
         </ul>
       </div>
     </div>
@@ -52,7 +56,7 @@
 // ---------------- LOAD CATEGORIES ----------------
 async function loadCategories() {
   try {
-    const res = await fetch("/api/categories", {
+    const res = await fetch("http://localhost:3000/api/categories", {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     });

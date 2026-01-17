@@ -96,14 +96,19 @@ body {
     font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: Bold;
-    transition: color 0.3s ease;
+    padding: 10px 12px;
+    border-radius: 20px;               /* pill shape */
+    transition: 
+        background 0.15s ease-in-out,
+        transform 0.2s ease-in-out;
 }
 .navbar ul li {
     position: relative;
     padding: 0 20px;
 }
 .navbar ul li a:hover {
-    color: white;             
+    background: #4a6e69; /* soft white glow */
+    transform: translateY(-1px);           
 }
 
 .overlay-menu ul li {
@@ -642,6 +647,7 @@ p{
 .card p{
     font-size: 0.3em;  
     margin: 0;
+    margin-left: 1.5em;
     text-align: left;
     color: white;
     text-overflow: ellipsis; 
@@ -655,13 +661,14 @@ p{
 #quote{
     font-size: 2em;         
     line-height: 1;
+    max-width: 0.8em;
     font-family: "Montserrat", sans-serif;
 }
 
 .card > span {
     display: flex;          
     align-items: center;
-    margin: 0.2em 0.2em 0.2em 0;
+    margin: 0.2em 0.2em 0.2em 0.5em;
     font-family: "Inter", sans-serif;
     gap: 0.2em;
     text-align: left;
@@ -736,34 +743,55 @@ p{
     color: #aaa;
     margin: 0;
 }
-
+#blogs li{
+    background-color: #689891;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+}
+#blogs{
+    margin-top: 50px;
+}
+#categories li{
+    background-color: #689891;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+}
+#categories{
+    margin-top: 50px
+}
 /* =========================
    LAYOUT*/
 .hero-forums {
-    background-color:#689891;
+    background-color:#1a191b;
     padding: 30px 60px;
     border-radius: 30px;
+    border: 10px solid #689891;
     width: 70%;
     margin: 5em auto;
     font-family: "Inter", sans-serif;
     font-size: 0.9em;
-    box-shadow: #4a6e69 2px 5px;
-
 }
 .hero-forums h1{
     font-size: 4em;
     color: white;
-    margin: 0;
+    margin: 10px 0;
 }
 .hero-forums ul{
     font-size: 2em;
     color: white;
     margin: 0;
+    list-style-type: none;
+    margin-top: 100px;
+}
+.hero-forums li{
+
 }
 .hero-forums h2{
     font-size: 1em;
     color: white;
-    margin: 2px 10px 0 10px;
+    margin: 2px 30px 100px 30px;
 }
 .hero-forums h3{
     font-size: 2em;
@@ -789,24 +817,26 @@ p{
     color: inherit;         /* optional: keeps the text color same as parent */
 }
 .hero-forums-general{
-    margin: 100px 200px;
+    margin: 100px 300px;
 }
 
 
 /* Optional: change color on hover */
 .hero-forums a:hover {
     transition: 200ms;
-    color:black; /* or any color you like */
+    color: #4a6e69; /* or any color you like */
     text-decoration: none;
 }
 .thread-item{
-    background-color:#689891;
+    background-color:#1a191b;
     padding: 30px 60px;
+    border: #689891 solid 10px;
     margin: 20px;
     list-style: none;
     text-decoration: none;
     border-radius: 30px;
     font-family: "Inter", sans-serif;
+    color: white;
 }
 .thread-item a{ 
     font-family: "Inter", sans-serif;
@@ -814,16 +844,24 @@ p{
     text-decoration: none;
     color: white;
 }
+
 #threads-list a:hover {
     color:#4a6e69; /* or any color you want for hover */
     text-decoration: none;
 }
 .comment-item{
-    margin: 0;
+    padding: 10px !important; 
+    margin: 0 !important;
     font-size: 0.5em;
     font-family: "Inter", sans-serif;
     color: white;
     list-style: none;
+    border: #689891 solid 4px;
+    max-height: fit-content;
+    max-width: 800px;
+}
+.comment-item p{
+    margin: 10px 30px 10px  !important;
 }
 .hero-forums h3 {
     font-size: 1.5rem; /* smaller than default h2 */
@@ -833,9 +871,9 @@ p{
 
 .hero-forums p {
     margin-left: 10px;
-    font-size: 0.9rem; /* smaller than default paragraph */
+    margin-bottom: 40px;
+    font-size: 1.5rem; /* smaller than default paragraph */
     line-height: 1.4;  /* optional: improves readability */
-    margin: 2em 0 1em 0;
 }
 .toast {
   visibility: hidden; /* hidden by default */
@@ -862,6 +900,7 @@ p{
 
 
 .forums-entry {
+    margin-top: 50px;
     background-color: #292929;
     border-radius: 3em;
     padding: 3em;
@@ -876,13 +915,9 @@ p{
     gap: 2em;
     justify-content: flex-start;
 }
-
 .forums-textbox-container {
     flex: 1;
 }
-
-/* =========================
-   INPUTS*/
 .forums-textbox {
     width: 100%;
     min-height: 4em;
@@ -900,15 +935,83 @@ p{
     box-sizing: border-box;
 }
 
+
+#forums.pfp{
+    font-size: 0.3em;  
+    margin: 0;
+    margin-left: 1.5em;
+    text-align: left;
+    color: white;
+    text-overflow: ellipsis; 
+    flex: 1; 
+    font-family: "Inter", sans-serif;
+    font-weight: Bold;
+}
+
+#forum-entry-actions > div:not(.forums-postbutton){
+    display: flex;
+    gap: 1em;
+}
+.forums-postbutton {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.forums-post-userinfo {
+    display: flex;
+    align-items: center;
+    gap: 1em; /* space between pfp and details */
+}
+
+.forums-post-pfp {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.forums-post-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.forums-username {
+    font-size: 1rem;
+    margin: 0;
+    color: white;
+}
+.forums-post-content{
+    margin: 1em 0;
+}
+.forums-time {
+    font-size: 0.8rem;
+    margin: 0;
+    color: #ccc;
+}
+.forums-post{
+    background-color: #292929;
+    border-radius: 3em;
+    padding: 3em;
+    display: flex;
+    margin: 3em auto;
+    display: flex;
+    flex-direction: column;
+}   
+.forums-post-actions {
+    display: flex;
+    gap: 1em; /* space between buttons */
+    margin-top: 0.5em;
 /* =========================
    POSTS / THREADS / REPLIES*/
-.forums-post-wrapper {
-    margin-top: 3em;
 }
 
 .forums-comments {
     display: flex;
     flex-direction: column;
+    background-color: #1a191b !important;
+    
 }
 
 .forums-comment {
@@ -953,8 +1056,9 @@ p{
 .action-btn {
     display: flex;
     align-items: center;
+    max-width: fit-content;
     gap: 0.3em;
-    background: #292929;
+    background: #689891;
     color: white;
     border: none;
     border-radius: 0.5em;
@@ -966,9 +1070,65 @@ p{
 }
 
 .action-btn:hover {
-    background: #3f3f3f;
+    background: #4a6e69;
 }
 
+.action-btn .count {
+    font-weight: bold;
+}
+.post-divider {
+    border: none;        /* remove default border */
+    border-top: 1px solid #555; /* horizontal line */
+    margin: 1em 0;     /* spacing above and below */
+}
+.action-btn-img{
+    background-color: none;
+    max-width: 2em;
+}
+.forums-user-details,.forums-post-details {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9em;
+}
+.forums-post-wrapper .comment{
+    transform: translatex(+10%);
+    background-color:#292929;
+    padding: 3em;
+    border-radius: 2em;
+}
+.forums-post-wrapper .comment::before {
+    content: "";
+    position: absolute;
+
+    /* position to the left of comment */
+    left: -2.5em;
+    top: -2.5em;
+    border-bottom-left-radius: 6px;
+
+
+    width: 2em;   /* horizontal part */
+    height: 7.5em;    /* vertical part */
+
+    border-left: 2px solid #555;
+    border-bottom: 2px solid #555;
+}
+.forums-comments {
+  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.comment-input textarea {
+  width: 100%;
+  resize: none;
+  background: #1a191b;
+  color: white;
+  border-radius: 1em;
+  padding: 1em;
+}
+.hidden {
+  display: none;
+}
 .action-btn-img {
     max-width: 2em;
     pointer-events: none;
@@ -990,6 +1150,28 @@ p{
     padding: 3em;
     border-radius: 3em;
 }
+#forums-action-btn-image{
+    font-family: "Inter", sans-serif;
+    font-size: 1.25em;
+    color:#aaa;
+}
+#submit-forum-post-arrow{
+    transform: rotate(90deg); 
+}
+.submit-comment{
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+}
+.submit-comment img{
+    background: transparent;
+    pointer-events: none;
+}
+#submit-comment-post-arrow{
+    transform: rotate(90deg); 
+    background: transparent;
+    border: none;
+    transition: background 0.2s ease;
 
 .comment-input textarea {
     width: 100%;
@@ -1039,8 +1221,8 @@ p{
 path {
     fill: white!important;
     stroke: #202020;
-    transition: fill 0.2s; 
-    cursor: pointer;      
+    transition: fill 0.2s; /* explicitly say "fill" */
+    cursor: pointer;       /* optional: shows pointer on hover */
     pointer-events: all;  
 }
 .hotline-container h1{
