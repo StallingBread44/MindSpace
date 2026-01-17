@@ -1172,7 +1172,7 @@ p{
     background: transparent;
     border: none;
     transition: background 0.2s ease;
-
+}
 .comment-input textarea {
     width: 100%;
     resize: none;
@@ -1335,7 +1335,6 @@ button:disabled{
 /* Default desktop */
 .navbar ul {
     display: flex;
-    gap: 2.2rem;
     font-size: var(--nav-scale-large);
     white-space: nowrap;   
 }
