@@ -320,6 +320,9 @@ p{
     align-items: center;
     margin: 5px 0;
 }
+#bpalogo{
+    width: 80% !important; 
+}
 .login-option-img {
     background-color: #1a191b;
     
@@ -1319,10 +1322,7 @@ button:disabled{
     border: 1px #443d4b solid;
     cursor:default;
 }
-#bpalogo{
-    width: 80%
 
-}
 
 /* NAV RESPONSIVE SCALING */
 :root {
