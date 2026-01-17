@@ -68,7 +68,7 @@ body {
     justify-content: center;
     position: absolute;        /* absolute positioning to truly center */
     transform: translateX(+20%); /* perfect horizontal centering */
-
+    z-index: 1000;
     align-items: center;
     background: #689891;
     border-radius: 36px;
