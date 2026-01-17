@@ -61,7 +61,7 @@
         const list = document.getElementById("blogs");
 
         try {
-            const res = await fetch("http://localhost:3000/api/blogs", {
+            const res = await fetch("/api/blogs", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });

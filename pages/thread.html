@@ -25,6 +25,7 @@
             <li><a href="../pages/blogs.html">Blog Posts</a></li>
             <li><a href="../pages/forums.html">Forums</a></li>
             <li><a href="../pages/testimonials.html">Testimonials</a></li>
+            <li><a href="https://www.therapynotes.com">Counseling</a></li>
           </ul>
         </nav>
       </div>
@@ -74,7 +75,7 @@ var params = new URLSearchParams(window.location.search);
 var id = params.get("id");
 
 /* LOAD THREAD */
-fetch("http://localhost:3000/api/threads/" + id)
+fetch("/api/threads/" + id)
   .then(function(res) { return res.json(); })
   .then(function(data) {
     document.getElementById("title").textContent = data.thread.title;
