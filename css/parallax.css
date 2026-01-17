@@ -1,35 +1,42 @@
 
+@media screen and (min-width: 1024px) {
+
 .homepage > * {
     grid-area: stack;
+    
 }
 .parallax-priorityobj{
-    z-index: 1000;
 }
 header{
-    z-index: 1000;
+}
+#homepage{
+    overflow-x: hidden;
+      max-width: 100%;
+    max-width: 100%;
+
 }
 #trees{
-    width: 102vw;
+    width: 120vw;
     max-height: fit-content;
     object-fit: cover;
     position: absolute; 
-    top: 1px;
+    top: -200px;
     left: 1px;
     z-index: 10;
     animation: parallax linear;
     animation-timeline: scroll();
-    --parallax-speed: 8;
+    --parallax-speed: 20;
 }
 #hills{
-    width: 70.7919071126vw;
+    width: 70.9919071126vw;
     object-fit: cover;
     position: absolute; 
-    top: 460px;
-    left: 520px;
+    top: 454px;
+    left: 515px;
     z-index: 9;
     animation: parallax linear;
     animation-timeline: scroll();
-    --parallax-speed: 10;
+    --parallax-speed: 18;
 }
 #empty{
     width: 100vw;
@@ -41,25 +48,25 @@ header{
     --parallax-speed: 5;
 }
 #hills-2{
-    width: 101.997803628vw;
+    width: 100.999803628vw;
     object-fit: cover;
     position: absolute; 
     top: 0px;
-    left: 0.01px;
+    right: 50px;
     z-index: 8;
     animation: parallax linear;
     animation-timeline: scroll();
-    --parallax-speed: 10;
+    --parallax-speed: 14;
 }
 #hills-3{
     width: 100vw;
     object-fit: cover;
     position: absolute; 
-    top: 100px;
+    top: 80px;
     z-index: 6;
     animation: parallax linear;
     animation-timeline: scroll();
-    --parallax-speed: 11;
+    --parallax-speed: 15;
 }
 #empty-2{
     width: 100vw;
@@ -76,18 +83,19 @@ header{
     width: 47.5353831137vw;
     object-fit: cover;
     position: absolute; 
-    top: 80px;
-    left: 898px;
+    top: 135px;
+    left: 900px;
     z-index: 7;
     animation: parallax linear;
     animation-timeline: scroll();
-    --parallax-speed: 10;
+    --parallax-speed: 17;
 }
 #sky{
     width: 100vw;
     object-fit: cover;
     position: absolute; 
     top: 0px;
+    left: 2px;
     z-index: 1;
     animation: parallax linear;
     animation-timeline: scroll();
@@ -95,9 +103,10 @@ header{
 }
 @keyframes parallax {
     to { 
-        transform: translateY(calc(var(--parallax-speed) * 200px))
+        transform: translateY(calc(var(--parallax-speed) * -200px))
     }
 }
 #bpalogo{
     width: 80%
+}
 }
