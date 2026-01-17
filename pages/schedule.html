@@ -1,58 +1,80 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title id>MindSpace</title>
-    <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/theme.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></head>
+    <head>
+        <meta charset="UTF-8">
+        <title id>MindSpace</title>
+        <link rel="icon" href="../assets/mindspace-logo.PNG" type="image/png">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/theme.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
 </head>
-
 <body>
     <header>
-    <div class="header-wrapper">
-        <div class="logo-wrapper">
-        <a class="logo" href="../index.html" ><img src="../assets/logo-withtname.svg"></a>
-        </div>
-        <div class="nav-wrapper">
-            <nav class="navbar">
+        <div class="header-wrapper">
+            <div class="logo-wrapper">
+                <a class="logo" href="../index.html">
+                    <img src="../assets/logo-withtname.svg">
+                </a>
+            </div>
+            <div class="nav-wrapper">
+                <nav class="navbar">
+                    <ul>
+                        <li>
+                            <a href="../pages/mental-health-info.html">Mental Health Info</a>
+                        </li>
+                        <li>
+                            <a href="../pages/blogs.html">Blog Posts</a>
+                        </li>
+                        <li>
+                            <a href="../pages/forums.html">Forums</a>
+                        </li>
+                        <li>
+                            <a href="../pages/testimonials.html">Testimonials</a>
+                        </li>
+                        <li>
+                            <a href="https://www.therapynotes.com">Counseling</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="login-btn-wrapper">
+                <a href="../pages/login.html" class="login-direct">Login</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="overlay-menu">
                 <ul>
-                    <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
-                    <li><a href="../pages/blogs.html">Blog Posts</a></li>
-                    <li><a href="../pages/forums.html">Forums</a></li>
-                    <li><a href="../pages/testimonials.html">Testimonials</a></li>
-                    <li><a href="https://www.therapynotes.com">Counseling</a></li>
+                    <li>
+                        <a href="../pages/mental-health-info.html">Mental Health Info</a>
+                    </li>
+                    <li>
+                        <a href="../pages/blogs.html">Blog Posts</a>
+                    </li>
+                    <li>
+                        <a href="../pages/forums.html">Forums</a>
+                    </li>
+                    <li>
+                        <a href="../pages/testimonials.html">Testimonials</a>
+                    </li>
                 </ul>
-            </nav>
+            </div>
         </div>
-       <div class="login-btn-wrapper">
-            <a href="../pages/login.html" class="login-direct">Login</a>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="overlay-menu">
-            <ul>
-                <li><a href="../pages/mental-health-info.html">Mental Health Info</a></li>
-                <li><a href="../pages/blogs.html">Blog Posts</a></li>
-                <li><a href="../pages/forums.html">Forums</a></li>
-                <li><a href="../pages/testimonials.html">Testimonials</a></li>
-                <li><a href="https://www.therapynotes.com">Counseling</a></li>
-            </ul>
-        </div>
-    </div>
     </header>
 </body>
 <div class="hero">
     <div class="world-map">
         <div class="map-container">
-            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--
+            <?xml
+            version="1.0" encoding="UTF-8" standalone="no"?>
+            <!--
 ************* Copyright (c) 2017 Pareto Softare, LLC DBA Simplemaps.com *******************		
 ************* Free for Commercial Use, full terms at  http://simplemaps.com/resources/svg-license ************
 ************* Attribution is appreciated! http://simplemaps.com ***************************
@@ -137,8 +159,7 @@
     </div>
     <div class="side-panel">
         <div class="hotline-container">
-            <h1 class="state">
-                Texas
+            <h1 class="state">Texas
             </h1>
             <ul>
                 <li>
@@ -152,80 +173,87 @@
             </ul>
         </div>
         <button class="side-panel-close-btn">
-        <i class="fas fa-times">X</i>
-    </button>
-    <h2 class="loading">Loading...</h2>
+            <i class="fas fa-times">X</i>
+        </button>
+        <h2 class="loading">Loading...</h2>
     </div>
-    
 </div>
-
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const sidePanel = document.querySelector(".side-panel");
-  const container = document.querySelector(".side-panel .hotline-container");
-  const closeBtn = document.querySelector(".side-panel-close-btn");
-  const loading = document.querySelector(".loading");
-  const stateNameOutput = document.querySelector(".state");
-  const crisisCenterOutput = document.querySelector(".crisis-center");
-  const numberOutput = document.querySelector(".crisis-center-number");
+    document.addEventListener("DOMContentLoaded", () => {
+        const sidePanel = document.querySelector(".side-panel");
+        const container = document.querySelector(".side-panel .hotline-container");
+        const closeBtn = document.querySelector(".side-panel-close-btn");
+        const loading = document.querySelector(".loading");
+        const stateNameOutput = document.querySelector(".state");
+        const crisisCenterOutput = document.querySelector(".crisis-center");
+        const numberOutput = document.querySelector(".crisis-center-number");
 
-  let stateData = {}; // Will hold Google Sheets data
+        let stateData = {};
+        // Will hold Google Sheets data
 
-  // Fetch Google Sheets CSV
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vT3UfZj9-3GBdT0C6n1-sNlQiiUOV309ep0J3DwyXXV0fcv8TGW8HzXpbShJfM4_DrZd8z8sf1fows8/pub?output=csv")
-    .then(res => res.text())
-    .then(csv => {
-      // Parse CSV
-      const rows = csv.split("\n");
-      rows.slice(1).forEach(row => {
-        const [state, crisis, number] = row.split(",");
-        stateData[state.trim()] = { crisisCenter: crisis.trim(), number: number.trim() };
-      });
-    });
+        // Fetch Google Sheets CSV
+        fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vT3UfZj9-3GBdT0C6n1-sNlQiiUOV309ep0J3DwyXXV0fcv8TGW8HzXpbShJfM4_DrZd8z8sf1fows8/pub?output=csv").then(res => res.text()).then(csv => {
+            // Parse CSV
+            const rows = csv.split("\n");
+            rows.slice(1).forEach(row => {
+                const [state,crisis,number] = row.split(",");
+                stateData[state.trim()] = {
+                    crisisCenter: crisis.trim(),
+                    number: number.trim()
+                };
+            }
+            );
+        }
+        );
 
-  // Add events to each state
-  document.querySelectorAll("svg path").forEach(path => {
-    path.style.cursor = "pointer";
+        // Add events to each state
+        document.querySelectorAll("svg path").forEach(path => {
+            path.style.cursor = "pointer";
 
-    // Hover
-    path.addEventListener("mouseenter", () => {
-      path.style.fill = "#c99aff";
-    });
-    path.addEventListener("mouseleave", () => {
-      path.style.fill = "#f9f9f9";
-    });
+            // Hover
+            path.addEventListener("mouseenter", () => {
+                path.style.fill = "#c99aff";
+            }
+            );
+            path.addEventListener("mouseleave", () => {
+                path.style.fill = "#f9f9f9";
+            }
+            );
 
-    // Click
-    path.addEventListener("click", () => {
-      const state = path.getAttribute("data-name");
-      if (!state) return;
+            // Click
+            path.addEventListener("click", () => {
+                const state = path.getAttribute("data-name");
+                if (!state)
+                    return;
 
-      // Show loading
-      loading.style.display = "block";
-      container.classList.add("hide");
+                // Show loading
+                loading.style.display = "block";
+                container.classList.add("hide");
 
-      // Open panel
-      sidePanel.classList.add("side-panel-open");
+                // Open panel
+                sidePanel.classList.add("side-panel-open");
 
-      setTimeout(() => {
-        // Populate panel from Google Sheets
-        stateNameOutput.innerText = state;
-        crisisCenterOutput.innerText = stateData[state]?.crisisCenter || "N/A";
-        numberOutput.innerText = stateData[state]?.number || "N/A";
+                setTimeout( () => {
+                    // Populate panel from Google Sheets
+                    stateNameOutput.innerText = state;
+                    crisisCenterOutput.innerText = stateData[state]?.crisisCenter || "N/A";
+                    numberOutput.innerText = stateData[state]?.number || "N/A";
 
-        loading.style.display = "none";
-        container.classList.remove("hide");
-      }, 300);
-    });
-  });
+                    loading.style.display = "none";
+                    container.classList.remove("hide");
+                }
+                , 300);
+            }
+            );
+        }
+        );
 
-  closeBtn.addEventListener("click", () => {
-    sidePanel.classList.remove("side-panel-open");
-  });
-});
-
+        closeBtn.addEventListener("click", () => {
+            sidePanel.classList.remove("side-panel-open");
+        }
+        );
+    }
+    );
 </script>
-
 </html>
-
 

@@ -1437,3 +1437,122 @@ button:disabled{
         margin-top: 0.6rem;
     }
 }
+
+
+.world-map{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: max-content;
+    min-height: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+.world-map svg{
+    width: 90vw;
+    height: 60vw;
+}
+path {
+    fill: white!important;
+    stroke: #202020;
+    transition: fill 0.2s; /* explicitly say "fill" */
+    cursor: pointer;       /* optional: shows pointer on hover */
+    pointer-events: all;  
+}
+.hotline-container h1{
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 5em;
+}
+.hotline-container p{
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 3em;
+}
+
+path:hover {
+    fill: #4a6e69!important;
+}
+.side-panel{
+    position: fixed;
+    background-color:#292929;
+    padding: 2em;
+    top: 0;
+    left: -40em;
+    width: 100%;
+    max-width: 30em;
+    height: 100vh;
+    transition: 
+        600ms cubic-bezier(0.77, 0, 0.18, 1);
+    overflow: scroll;
+    z-index: 1;
+    text-align: left!important;
+}
+.side-panel-container{
+    padding-block: 2em;
+    transition: 200ms ease-out;
+}
+.side-panel-open{
+    left:0;
+}
+.hide{
+    opacity:0;
+}
+.side-panel-close-btn{
+    position:absolute;
+    top:0;
+    right: 0;
+    width: 5em;
+    height: 5em;
+    border: none;
+    background-color: #4a6e69;
+    color: white;
+    transition: 100ms;
+    cursor: pointer;
+}
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    transition: 200ms;
+}
+.side-panel-close-btn i{
+    font-size: 2em;
+}
+.close-btn:hover{
+    background-color:#689891;
+}
+.side-panel .hotline-container > ul{
+    margin-top: 2em;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-size: 1.5em;
+    list-style: none;
+}
+.side-panel .hotline-container > ul > li{
+    margin-bottom: 2em;
+}
+.side-panel li{
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+.side-panel ul ul{
+    margin-top: 1em;
+    font-size: 0.7em;
+    list-style: circle;
+    padding-left: 2em;
+}
+.side-panel strong{
+    color:#4a6e69;
+}
+button:disabled{
+    background-color: #1d1a20;
+    border: 1px #443d4b solid;
+    cursor:default;
+}
